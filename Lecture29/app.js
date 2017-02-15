@@ -4,7 +4,7 @@
 angular.module('ShoppingListDirectiveApp', [])
 .controller('ShoppingListController', ShoppingListController)
 .factory('ShoppingListFactory', ShoppingListFactory)
-// .controller('ShoppingListDirectiveController', ShoppingListDirectiveController)
+.controller('ShoppingListDirectiveController', ShoppingListDirectiveController)
 .directive('shoppingList', ShoppingListDirective);
 
 
@@ -16,8 +16,8 @@ function ShoppingListDirective() {
       title: '@'
     },
     // controller: 'ShoppingListDirectiveController as list',
-    controller: ShoppingListDirectiveController,
-    controllerAs: 'list',
+    controller: 'ShoppingListDirectiveController as list',
+    //controllerAs: 'list',
     bindToController: true
   };
 
@@ -35,7 +35,6 @@ function ShoppingListDirectiveController() {
         return true;
       }
     }
-
     return false;
   };
 }
