@@ -14,8 +14,8 @@ angular.module('ShoppingListComponentApp', [])
   }
 });
 
-ShoppingListComponentController.$inject = ['$scope', '$element']
-function ShoppingListComponentController($scope, $element) {
+ShoppingListComponentController.$inject = ['$element']
+function ShoppingListComponentController($element) {
   var $ctrl = this;
   var totalItems;
 
@@ -42,38 +42,39 @@ function ShoppingListComponentController($scope, $element) {
     console.log("Changes: ", changeObj);
   };
 
-  $ctrl.$postLink = function () {
-    $scope.$watch('$ctrl.cookiesInList()', function (newValue, oldValue) {
-      console.log($element);
-      if (newValue === true) {
-        // Show warning
-        var warningElem = $element.find('div.error');
-        warningElem.slideDown(900);
-      }
-      else {
-        // Hide warning
-        var warningElem = $element.find('div.error');
-        warningElem.slideUp(900);
-      }
-    })
-  };
-
-  // $ctrl.$doCheck = function () {
-  //   if ($ctrl.items.length !== totalItems) {
-  //     console.log("# of items changed. Checking for Cookies!");
-  //     totalItems = $ctrl.items.length;
-  //     if ($ctrl.cookiesInList()) {
-  //       console.log("Oh, NO! COOKIES!!!!!");
+  // before was based on $scope
+  // $ctrl.$postLink = function () {
+  //   $scope.$watch('$ctrl.cookiesInList()', function (newValue, oldValue) {
+  //     console.log($element);
+  //     if (newValue === true) {
+  //       // Show warning
   //       var warningElem = $element.find('div.error');
   //       warningElem.slideDown(900);
   //     }
   //     else {
-  //       console.log("No cookies here. Move right along!");
+  //       // Hide warning
   //       var warningElem = $element.find('div.error');
   //       warningElem.slideUp(900);
   //     }
-  //   }
+  //   })
   // };
+
+  $ctrl.$doCheck = function () {
+    if ($ctrl.items.length !== totalItems) {
+      console.log("# of items changed. Checking for Cookies!");
+      totalItems = $ctrl.items.length;
+      if ($ctrl.cookiesInList()) {
+        console.log("Oh, NO! COOKIES!!!!!");
+        var warningElem = $element.find('div.error');
+        warningElem.slideDown(900);
+      }
+      else {
+        console.log("No cookies here. Move right along!");
+        var warningElem = $element.find('div.error');
+        warningElem.slideUp(900);
+      }
+    }
+  };
 }
 
 
