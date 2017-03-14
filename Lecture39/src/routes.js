@@ -37,12 +37,12 @@ function RoutesConfig($stateProvider, $urlRouterProvider) {
     controller: 'ItemDetailController as itemDetail',
     resolve: {
       item: ['$stateParams', 'ShoppingListService',
-            function ($stateParams, ShoppingListService) {
-              return ShoppingListService.getItems()
-                .then(function (items) {
-                  return items[$stateParams.itemId];
-                });
-            }]
+        function ($stateParams, ShoppingListService) {
+          return ShoppingListService.getItems()
+          .then(function (items) {
+            return items[$stateParams.itemId];
+          });
+        }]
     }
   });
 }
